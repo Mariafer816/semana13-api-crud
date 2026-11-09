@@ -1,0 +1,56 @@
+/* Tema oscuro: SOLO se carga cuando la cookie "tema" vale "oscuro".
+   Sobrescribe los colores de los demás CSS sin modificarlos (se carga después). */
+
+html { color-scheme: dark; }
+
+body { background-color: #0f1519; background: #0f1519; color: #e5e7eb; }
+
+.contenedor { background-color: #172026; }
+
+/* Tarjetas y bloques blancos */
+.formulario, .tabla-contenedor, .curso, .pie, .tarjeta, .error-tarjeta, .tarjeta-menu {
+    background: #172026;
+    border-color: #2a3a42;
+}
+.pie { color: #9aa7b0; }
+
+/* Títulos y etiquetas en verde (más claro para que se lean sobre fondo oscuro) */
+h1, .formulario h2, .tarjeta-menu h3, .titulo, .titulo-seccion, .curso h3, dt, label, .error-codigo { color: #5fcf9a; }
+.campo label { color: #cbd5db; }
+.encabezado h1, .encabezado p, .encabezado { color: white; }
+
+/* Textos secundarios */
+.menu-intro, .tarjeta-menu p, .paginacion-info, .sin-resultados, .sin-reservas, .curso p, .auth-enlace, .ayuda, .error-mensaje { color: #9aa7b0; }
+.auth-enlace a { color: #5fcf9a; }
+
+/* Campos de formulario */
+input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="submit"]),
+select, textarea {
+    background-color: #0f1519;
+    color: #e5e7eb;
+    border: 1px solid #33454e;
+}
+input:focus, select:focus, textarea:focus { border-color: #2fa06b; }
+input::placeholder { color: #6b7c85; }
+
+/* Tablas */
+td { border-bottom-color: #2a3a42; }
+tr:hover { background-color: #1e2c33; }
+
+/* Alertas y estados */
+.estado, .disponible, .mensaje, .alerta-exito, .aviso {
+    background: #12372a; color: #a7e3c4; border-color: #1f5c45;
+}
+.no-disponible, .error-msg, .alerta-error, .error-general {
+    background: #3d1a1f; color: #f2b8bd; border-color: #6b2a31;
+}
+.error { color: #ff8a94; }
+
+/* Botones claros -> oscuros */
+.cancelar, .btn-limpiar, .volver, .error-boton.secundario { background: #2a3a42; color: #e5e7eb; }
+.cancelar:hover, .btn-limpiar:hover, .error-boton.secundario:hover { background: #364a54; }
+
+/* Paginación */
+.paginacion li a, .paginacion li span { background: #172026; border-color: #2a3a42; color: #8fe0b8; }
+.paginacion li a:hover { background: #1f3a30; }
+.paginacion li.deshabilitado span { background: #1b2429; color: #5b6b73; }

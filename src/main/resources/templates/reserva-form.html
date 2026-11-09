@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title th:text="${reservaId != null} ? 'Editar Reserva' : 'Nueva Reserva'">Nueva Reserva</title>
+    <link rel="stylesheet" th:href="@{/css/mejoras.css}">
+
+    <link rel="stylesheet" th:href="@{/css/reserva-form.css}">
+
+</head>
+
+<body>
+
+<header class="encabezado">
+
+    <h1 th:text="${reservaId != null} ? 'Editar Reserva' : 'Nueva Reserva'">Nueva Reserva</h1>
+
+    <p>
+        Registrar una reserva de aula
+    </p>
+
+</header>
+
+<nav th:replace="~{fragments/componentes :: menu('reservas')}"></nav>
+
+<main class="contenedor">
+
+    <form
+            class="formulario"
+            th:action="${reservaId != null} ? @{/reservas/{id}/actualizar(id=${reservaId})} : @{/reservas/guardar}"
+            th:object="${reservaForm}"
+            method="post">
+
+        <h2 class="titulo">
+            Datos de la reserva
+        </h2>
+
+        <div
+                th:if="${errorReserva}"
+                class="error-general"
+                th:text="${errorReserva}">
+
+            El aula ya está reservada en ese horario.
+
+        </div>
+
+        <!-- Aula -->
+
+        <div class="campo">
+
+            <label for="aula">
+                Aula
+            </label>
+
+            <select
+                    id="aula"
+                    th:field="*{aulaId}">
+
+                <option value="">
+                    Seleccione un aula
+                </option>
+
+                <option
+                        th:each="aula : ${aulas}"
+                        th:value="${aula.id}"
+                        th:text="${aula.nombre + ' - ' + aula.ubicacion + ' - Capacidad: ' + aula.capacidad}">
+
+                    Aula 101
+
+                </option>
+
+            </select>
+
+            <span
+                    class="error"
+                    th:if="${#fields.hasErrors('aulaId')}"
+                    th:errors="*{aulaId}">
+            </span>
+
+        </div>
+
+        <!-- Usuario -->
+
+        <div class="campo">
+
+            <label for="usuario">
+                Usuario
+            </label>
+
+            <select
+                    id="usuario"
+                    th:field="*{usuarioId}">
+
+                <option value="">
+                    Seleccione un usuario
+                </option>
+
+                <option
+                        th:each="usuario : ${usuarios}"
+                        th:value="${usuario.id}"
+                        th:text="${usuario.nombre + ' - ' + usuario.correo}">
+
+                    Usuario
+
+                </option>
+
+            </select>
+
+            <span
+                    class="error"
+                    th:if="${#fields.hasErrors('usuarioId')}"
+                    th:errors="*{usuarioId}">
+            </span>
+
+        </div>
+
+        <!-- Curso (relación @ManyToOne Reserva -> Curso) -->
+
+        <div class="campo">
+
+            <label for="curso">
+                Curso
+            </label>
+
+            <select
+                    id="curso"
+                    th:field="*{cursoId}">
+
+                <option value="">
+                    Seleccione un curso
+                </option>
+
+                <option
+                        th:each="curso : ${cursos}"
+                        th:value="${curso.id}"
+                        th:text="${curso.nombre + ' (' + curso.horas + ' h)'}">
+
+                    Curso
+
+                </option>
+
+            </select>
+
+            <span
+                    class="error"
+                    th:if="${#fields.hasErrors('cursoId')}"
+                    th:errors="*{cursoId}">
+            </span>
+
+        </div>
+
+        <!-- Fecha -->
+
+        <div class="campo">
+
+            <label for="fecha">
+                Fecha
+            </label>
+
+            <input
+                    type="date"
+                    id="fecha"
+                    th:field="*{fecha}">
+
+            <span
+                    class="error"
+                    th:if="${#fields.hasErrors('fecha')}"
+                    th:errors="*{fecha}">
+            </span>
+
+        </div>
+
+        <!-- Hora inicio -->
+
+        <div class="campo">
+
+            <label for="horaInicio">
+                Hora de inicio
+            </label>
+
+            <input
+                    type="time"
+                    id="horaInicio"
+                    th:field="*{horaInicio}">
+
+            <span
+                    class="error"
+                    th:if="${#fields.hasErrors('horaInicio')}"
+                    th:errors="*{horaInicio}">
+            </span>
+
+        </div>
+
+        <!-- Hora fin -->
+
+        <div class="campo">
+
+            <label for="horaFin">
+                Hora de finalización
+            </label>
+
+            <input
+                    type="time"
+                    id="horaFin"
+                    th:field="*{horaFin}">
+
+            <span
+                    class="error"
+                    th:if="${#fields.hasErrors('horaFin')}"
+                    th:errors="*{horaFin}">
+            </span>
+
+        </div>
+
+        <div class="botones">
+
+            <button
+                    type="submit"
+                    class="boton guardar">
+
+                <span th:text="${reservaId != null} ? 'Actualizar reserva' : 'Guardar reserva'">Guardar reserva</span>
+
+            </button>
+
+            <a
+                    th:href="@{/reservas}"
+                    class="boton cancelar">
+
+                Cancelar
+
+            </a>
+
+        </div>
+
+    </form>
+
+</main>
+
+</body>
+
+</html>

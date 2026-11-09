@@ -1,0 +1,219 @@
+/* Componentes nuevos: menú, alertas, buscador y paginación.
+   Los nombres de clase son propios para no chocar con los estilos de cada página. */
+
+.menu-principal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    background: #146c43;
+    padding: 10px 15px;
+}
+
+.menu-principal a {
+    color: white;
+    text-decoration: none;
+    padding: 7px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.menu-principal a:hover,
+.menu-principal a.activo {
+    background: rgba(255, 255, 255, 0.22);
+}
+
+/* ---------- Alertas (mensajes de éxito / error) ---------- */
+.alerta {
+    padding: 13px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    border: 1px solid transparent;
+}
+
+.alerta-exito {
+    background: #d1e7dd;
+    color: #0f5132;
+    border-color: #badbcc;
+}
+
+.alerta-error {
+    background: #f8d7da;
+    color: #842029;
+    border-color: #f5c2c7;
+}
+
+/* ---------- Buscador ---------- */
+.buscador {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.buscador input[type="text"] {
+    flex: 1 1 240px;
+    padding: 11px 13px;
+    border: 1px solid #ced4da;
+    border-radius: 7px;
+    font-size: 15px;
+}
+
+.buscador input[type="text"]:focus {
+    outline: none;
+    border-color: #198754;
+}
+
+.btn-buscar,
+.btn-limpiar {
+    padding: 11px 18px;
+    border-radius: 7px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    font-family: inherit;
+}
+
+.btn-buscar {
+    background: #198754;
+    color: white;
+}
+
+.btn-buscar:hover {
+    background: #146c43;
+}
+
+.btn-limpiar {
+    background: #e9ecef;
+    color: #333;
+}
+
+.btn-limpiar:hover {
+    background: #d6dadd;
+}
+
+/* ---------- Paginación ---------- */
+.paginacion-bloque {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.paginacion-info {
+    color: #667085;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.paginacion {
+    list-style: none;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    margin: 0;
+    padding: 0;
+}
+
+.paginacion li a,
+.paginacion li span {
+    display: inline-block;
+    min-width: 38px;
+    padding: 8px 12px;
+    border: 1px solid #cfe3d8;
+    border-radius: 6px;
+    background: white;
+    color: #146c43;
+    text-decoration: none;
+    font-size: 14px;
+    text-align: center;
+}
+
+.paginacion li a:hover {
+    background: #e7f4ec;
+}
+
+.paginacion li.activa a {
+    background: #198754;
+    border-color: #198754;
+    color: white;
+    font-weight: bold;
+}
+
+.paginacion li.deshabilitado span {
+    color: #aab4ae;
+    background: #f4f6f5;
+}
+
+.paginacion li.puntos span {
+    border: none;
+    background: transparent;
+    color: #667085;
+}
+
+/* ---------- Texto cuando no hay resultados ---------- */
+.sin-resultados {
+    text-align: center;
+    padding: 30px;
+    color: #667085;
+}
+
+/* ---------- Botones de acción en tablas (eliminar) ---------- */
+.form-inline {
+    display: inline;
+}
+
+.btn-eliminar {
+    background: #c62828;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-family: inherit;
+}
+
+.btn-eliminar:hover {
+    background: #a31f1f;
+}
+
+/* Campo con error de validación */
+input.invalido {
+    border-color: #dc3545 !important;
+}
+
+/* ---------- Sesión (usuario actual + cerrar sesión) en el menú ---------- */
+.menu-principal .sesion {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 12px;
+    padding-left: 14px;
+    border-left: 1px solid rgba(255, 255, 255, 0.35);
+    color: white;
+    font-size: 13px;
+}
+
+.menu-principal .sesion form {
+    display: inline;
+}
+
+.menu-principal .btn-salir {
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: bold;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.menu-principal .btn-salir:hover {
+    background: rgba(255, 255, 255, 0.22);
+}

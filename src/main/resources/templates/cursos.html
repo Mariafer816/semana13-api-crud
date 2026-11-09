@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos | Reservas de Aulas</title>
+    <link rel="stylesheet" th:href="@{/css/mejoras.css}">
+
+    <link rel="stylesheet" th:href="@{/css/cursos.css}">
+</head>
+
+<body>
+
+<header class="encabezado">
+    <h1>Gestión de Cursos</h1>
+    <p>Sistema de Reservas de Aulas</p>
+</header>
+
+<nav th:replace="~{fragments/componentes :: menu('cursos')}"></nav>
+
+<main class="contenedor">
+
+    <div th:replace="~{fragments/componentes :: alertas}"></div>
+
+    <div class="barra">
+        <h2 class="titulo-seccion">Cursos disponibles</h2>
+        <a class="boton" th:href="@{/cursos/nuevo}">+ Nuevo curso</a>
+    </div>
+
+    <form th:replace="~{fragments/componentes :: buscador('/cursos', ${q}, 'Buscar curso por nombre')}"></form>
+
+    <ul class="lista-cursos">
+        <li class="curso" th:each="curso, estado : ${pagina.content}">
+            <span class="numero" th:text="${pagina.number * pagina.size + estado.count}">1</span>
+            <h3 th:text="${curso.nombre}">Nombre del curso</h3>
+            <p th:text="${curso.horas} + ' horas'">40 horas</p>
+            <div class="acciones">
+                <a class="boton-editar" th:href="@{/cursos/{id}/editar(id=${curso.id})}">Editar</a>
+                <form class="form-inline"
+                      th:action="@{/cursos/{id}/eliminar(id=${curso.id})}"
+                      method="post"
+                      onsubmit="return confirm('¿Está seguro de eliminar este curso?');">
+                    <button type="submit" class="btn-eliminar">Eliminar</button>
+                </form>
+            </div>
+        </li>
+
+        <li class="sin-resultados" th:if="${!pagina.hasContent()}">
+            <span th:if="${#strings.isEmpty(q)}">No hay cursos registrados.</span>
+            <span th:unless="${#strings.isEmpty(q)}"
+                  th:text="|No se encontraron cursos que contengan «${q}».|"></span>
+        </li>
+    </ul>
+
+    <div th:replace="~{fragments/componentes :: paginacion(${pagina}, '/cursos', ${q})}"></div>
+
+</main>
+
+<footer class="pie">
+    Sistema de Reservas de Aulas &copy; 2026
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Menú principal | Sistema de Reservas</title>
+    <link rel="stylesheet" th:href="@{/css/mejoras.css}">
+    <link rel="stylesheet" th:href="@{/css/listado.css}">
+    <link rel="stylesheet" th:href="@{/css/menu.css}">
+</head>
+
+<body>
+
+<header class="encabezado">
+    <h1>Menú principal</h1>
+    <p th:text="|Bienvenido, ${usuarioActivo}|">Bienvenido</p>
+</header>
+
+<nav th:replace="~{fragments/componentes :: menu('inicio')}"></nav>
+
+<main class="contenedor">
+
+    <div th:replace="~{fragments/componentes :: alertas}"></div>
+
+    <p class="menu-intro">¿Qué desea gestionar hoy?</p>
+
+    <section class="menu-rejilla">
+
+        <a class="tarjeta-menu" th:href="@{/reservas}">
+            <h3>Reservas</h3>
+            <p>Consultar, crear y modificar reservas de aulas.</p>
+        </a>
+
+        <a class="tarjeta-menu" th:href="@{/aulas}">
+            <h3>Aulas</h3>
+            <p>Administrar las aulas y su disponibilidad.</p>
+        </a>
+
+        <a class="tarjeta-menu" th:href="@{/cursos}">
+            <h3>Cursos</h3>
+            <p>Administrar los cursos que usan las aulas.</p>
+        </a>
+
+        <a class="tarjeta-menu" th:href="@{/usuarios}">
+            <h3>Usuarios</h3>
+            <p>Administrar docentes, estudiantes y administrativos.</p>
+        </a>
+
+    </section>
+
+</main>
+
+</body>
+
+</html>

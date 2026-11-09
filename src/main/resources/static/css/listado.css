@@ -1,0 +1,143 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f8f5;
+    color: #1f2937;
+}
+
+.encabezado {
+    background: #198754;
+    color: white;
+    padding: 28px 20px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+}
+
+.encabezado h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.encabezado p {
+    font-size: 16px;
+}
+
+.contenedor {
+    width: min(1150px, 92%);
+    margin: 35px auto;
+}
+
+.barra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 15px;
+}
+
+.titulo {
+    color: #146c43;
+    font-size: 25px;
+    border-left: 5px solid #198754;
+    padding-left: 12px;
+}
+
+.boton {
+    text-decoration: none;
+    background: #198754;
+    color: white;
+    padding: 11px 18px;
+    border-radius: 7px;
+    font-weight: bold;
+}
+
+.boton:hover {
+    background: #146c43;
+}
+
+.tabla-contenedor {
+    background: white;
+    border-radius: 12px;
+    overflow-x: auto;
+    box-shadow: 0 4px 15px rgba(25,135,84,0.10);
+    border: 1px solid #d8e8de;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #198754;
+    color: white;
+    padding: 15px;
+    text-align: left;
+}
+
+td {
+    padding: 14px;
+    border-bottom: 1px solid #e5eee8;
+}
+
+tr:hover {
+    background-color: #f1f8f4;
+}
+
+.estado {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.disponible {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+.no-disponible {
+    background: #f8d7da;
+    color: #842029;
+}
+
+.boton-reservas {
+    text-decoration: none;
+    background: #146c43;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.boton-reservas:hover {
+    background: #0f5132;
+}
+
+.boton-editar {
+    text-decoration: none;
+    background: #0d6efd;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.boton-editar:hover {
+    background: #0a58ca;
+}
+
+.pie {
+    margin-top: 45px;
+    padding: 18px;
+    background: white;
+    border-top: 1px solid #d8e8de;
+    text-align: center;
+    color: #667085;
+}

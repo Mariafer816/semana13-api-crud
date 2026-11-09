@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas</title>
+    <link rel="stylesheet" th:href="@{/css/mejoras.css}">
+
+    <link rel="stylesheet" th:href="@{/css/reservas.css}">
+</head>
+
+<body>
+
+<nav th:replace="~{fragments/componentes :: menu('reservas')}"></nav>
+
+<div class="contenedor">
+
+    <h1 th:if="${aulaFiltro == null}">Lista de Reservas</h1>
+    <h1 th:if="${aulaFiltro != null}" th:text="'Reservas del aula ' + ${aulaFiltro.nombre}">Reservas del aula</h1>
+
+    <div class="botones">
+        <a th:href="@{/reservas/nueva}" class="boton-nueva">
+            Nueva Reserva
+        </a>
+
+        <a th:href="@{/aulas}" class="boton-nueva">
+            Ver Aulas
+        </a>
+
+        <a th:if="${aulaFiltro != null}" th:href="@{/reservas}" class="boton-ver">
+            Ver todas las reservas
+        </a>
+    </div>
+
+    <div th:replace="~{fragments/componentes :: alertas}"></div>
+
+    <!-- El buscador solo aplica al listado general -->
+    <th:block th:if="${aulaFiltro == null}">
+        <form th:replace="~{fragments/componentes :: buscador('/reservas', ${q}, 'Buscar por aula, usuario o curso')}"></form>
+    </th:block>
+
+    <table>
+
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Aula</th>
+            <th>Usuario</th>
+            <th>Curso</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="reserva : ${pagina.content}">
+
+            <td th:text="${reserva.id}"></td>
+
+            <td th:text="${reserva.aula != null ? reserva.aula.nombre : 'Sin aula'}"></td>
+
+            <td th:text="${reserva.usuario != null ? reserva.usuario.nombre : 'Sin usuario'}"></td>
+
+            <td th:text="${reserva.curso != null ? reserva.curso.nombre : 'Sin curso'}"></td>
+
+            <td th:text="${reserva.fecha}"></td>
+
+            <td th:text="${#temporals.format(reserva.horaInicio, 'HH:mm') + ' - ' + #temporals.format(reserva.horaFin, 'HH:mm')}"></td>
+
+            <td><span class="estado" th:text="${reserva.estado}"></span></td>
+
+            <td>
+                <a th:href="@{/reservas/{id}(id=${reserva.id})}"
+                   class="boton-ver">
+                    Ver
+                </a>
+
+                <a th:href="@{/reservas/{id}/editar(id=${reserva.id})}"
+                   class="boton-editar">
+                    Editar
+                </a>
+
+                <form class="inline"
+                      th:action="@{/reservas/{id}/eliminar(id=${reserva.id})}"
+                      method="post"
+                      onsubmit="return confirm('¿Está seguro de eliminar esta reserva?');">
+                    <button type="submit" class="boton-eliminar">Eliminar</button>
+                </form>
+            </td>
+
+        </tr>
+
+        <tr th:if="${!pagina.hasContent()}">
+            <td colspan="8" class="sin-reservas">
+                <span th:if="${#strings.isEmpty(q)}">No hay reservas registradas.</span>
+                <span th:unless="${#strings.isEmpty(q)}"
+                      th:text="|No se encontraron reservas para «${q}».|"></span>
+            </td>
+        </tr>
+
+        </tbody>
+
+    </table>
+
+    <div th:replace="~{fragments/componentes :: paginacion(${pagina}, ${baseUrl}, ${q})}"></div>
+
+</div>
+
+</body>
+</html>

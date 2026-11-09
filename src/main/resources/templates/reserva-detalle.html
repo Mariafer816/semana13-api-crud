@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Reserva</title>
+    <link rel="stylesheet" th:href="@{/css/reserva-detalle.css}">
+    <link rel="stylesheet" th:if="${tema == 'oscuro'}" th:href="@{/css/tema-oscuro.css}">
+</head>
+<body>
+
+<header class="encabezado">
+    <h1>Detalle de la reserva</h1>
+    <p th:text="'Reserva #' + ${reserva.id}"></p>
+</header>
+
+<main class="contenedor">
+    <div class="tarjeta">
+        <dl>
+            <dt>ID</dt>
+            <dd th:text="${reserva.id}"></dd>
+
+            <dt>Aula</dt>
+            <dd th:text="${reserva.aula.nombre + ' - ' + reserva.aula.ubicacion}"></dd>
+
+            <dt>Usuario</dt>
+            <dd th:text="${reserva.usuario.nombre + ' (' + reserva.usuario.correo + ')'}"></dd>
+
+            <dt>Curso</dt>
+            <dd th:text="${reserva.curso != null ? reserva.curso.nombre + ' (' + reserva.curso.horas + ' h)' : 'Sin curso'}"></dd>
+
+            <dt>Fecha</dt>
+            <dd th:text="${reserva.fecha}"></dd>
+
+            <dt>Hora</dt>
+            <dd th:text="${#temporals.format(reserva.horaInicio, 'HH:mm') + ' - ' + #temporals.format(reserva.horaFin, 'HH:mm')}"></dd>
+
+            <dt>Estado</dt>
+            <dd th:text="${reserva.estado}"></dd>
+        </dl>
+
+        <div class="botones">
+            <a th:href="@{/reservas}" class="boton volver">Volver</a>
+
+            <a th:href="@{/reservas/{id}/editar(id=${reserva.id})}" class="boton editar">Editar</a>
+
+            <form th:action="@{/reservas/{id}/eliminar(id=${reserva.id})}" method="post"
+                  onsubmit="return confirm('¿Está seguro de eliminar esta reserva?');">
+                <button type="submit" class="boton eliminar">Eliminar</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

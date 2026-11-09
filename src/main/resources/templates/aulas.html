@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aulas | Sistema de Reservas</title>
+    <link rel="stylesheet" th:href="@{/css/mejoras.css}">
+
+    <link rel="stylesheet" th:href="@{/css/listado.css}">
+</head>
+
+<body>
+
+<header class="encabezado">
+
+    <h1>Gestión de Aulas</h1>
+
+    <p>
+        Sistema de Reservas de Aulas
+    </p>
+
+</header>
+
+<nav th:replace="~{fragments/componentes :: menu('aulas')}"></nav>
+
+<main class="contenedor">
+
+    <div th:replace="~{fragments/componentes :: alertas}"></div>
+
+    <div class="barra">
+
+        <h2 class="titulo">
+            Aulas registradas
+        </h2>
+
+        <div>
+            <a th:href="@{/reservas/nueva}" class="boton">
+                + Nueva reserva
+            </a>
+            <a th:href="@{/aulas/nueva}" class="boton">
+                + Registrar aula
+            </a>
+        </div>
+
+    </div>
+
+    <form th:replace="~{fragments/componentes :: buscador('/aulas', ${q}, 'Buscar aula por nombre')}"></form>
+
+    <div class="tabla-contenedor">
+
+        <table>
+
+            <thead>
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Nombre</th>
+
+                <th>Capacidad</th>
+
+                <th>Ubicación</th>
+
+                <th>Tipo</th>
+
+                <th>Estado</th>
+
+                <th>Reservas</th>
+
+                <th>Acciones</th>
+
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            <tr th:each="aula : ${pagina.content}">
+
+                <td th:text="${aula.id}">
+                    1
+                </td>
+
+                <td th:text="${aula.nombre}">
+                    Aula 101
+                </td>
+
+                <td th:text="${aula.capacidad}">
+                    30
+                </td>
+
+                <td th:text="${aula.ubicacion}">
+                    Bloque A
+                </td>
+
+                <td th:text="${aula.tipo}">
+                    Computación
+                </td>
+
+                <td>
+
+                    <span
+                            th:if="${aula.disponible}"
+                            class="estado disponible">
+
+                        Disponible
+
+                    </span>
+
+                    <span
+                            th:unless="${aula.disponible}"
+                            class="estado no-disponible">
+
+                        No disponible
+
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <a
+                            th:href="@{/aulas/{id}/reservas(id=${aula.id})}"
+                            class="boton-reservas">
+
+                        Ver reservas
+
+                    </a>
+
+                </td>
+
+                <td>
+
+                    <a
+                            th:href="@{/aulas/{id}/editar(id=${aula.id})}"
+                            class="boton-editar">
+
+                        Editar
+
+                    </a>
+
+                    <form class="form-inline"
+                          th:action="@{/aulas/{id}/eliminar(id=${aula.id})}"
+                          method="post"
+                          onsubmit="return confirm('¿Está seguro de eliminar esta aula?');">
+                        <button type="submit" class="btn-eliminar">Eliminar</button>
+                    </form>
+
+                </td>
+
+            </tr>
+
+            <tr th:if="${!pagina.hasContent()}">
+
+                <td colspan="8" class="sin-resultados">
+
+                    <span th:if="${#strings.isEmpty(q)}">No hay aulas registradas.</span>
+                    <span th:unless="${#strings.isEmpty(q)}"
+                          th:text="|No se encontraron aulas que contengan «${q}».|"></span>
+
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <div th:replace="~{fragments/componentes :: paginacion(${pagina}, '/aulas', ${q})}"></div>
+
+</main>
+
+<footer class="pie">
+
+    Sistema de Reservas de Aulas &copy; 2026
+
+</footer>
+
+</body>
+
+</html>

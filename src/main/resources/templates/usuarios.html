@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Usuarios | Sistema de Reservas</title>
+    <link rel="stylesheet" th:href="@{/css/mejoras.css}">
+
+    <link rel="stylesheet" th:href="@{/css/listado.css}">
+</head>
+
+<body>
+
+<header class="encabezado">
+
+    <h1>Gestión de Usuarios</h1>
+
+    <p>
+        Sistema de Reservas de Aulas
+    </p>
+
+</header>
+
+<nav th:replace="~{fragments/componentes :: menu('usuarios')}"></nav>
+
+<main class="contenedor">
+
+    <div th:replace="~{fragments/componentes :: alertas}"></div>
+
+    <div class="barra">
+
+        <h2 class="titulo">
+            Usuarios registrados
+        </h2>
+
+        <div>
+            <a th:href="@{/usuarios/nuevo}" class="boton">
+                + Registrar usuario
+            </a>
+        </div>
+
+    </div>
+
+    <form th:replace="~{fragments/componentes :: buscador('/usuarios', ${q}, 'Buscar usuario por nombre')}"></form>
+
+    <div class="tabla-contenedor">
+
+        <table>
+
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr th:each="usuario : ${pagina.content}">
+                <td th:text="${usuario.id}">1</td>
+                <td th:text="${usuario.nombre}">Nombre</td>
+                <td th:text="${usuario.correo}">correo@dominio.com</td>
+                <td th:text="${usuario.rol}">DOCENTE</td>
+                <td>
+                    <a th:href="@{/usuarios/{id}/editar(id=${usuario.id})}" class="boton-editar">Editar</a>
+
+                    <form class="form-inline"
+                          th:action="@{/usuarios/{id}/eliminar(id=${usuario.id})}"
+                          method="post"
+                          onsubmit="return confirm('¿Está seguro de eliminar este usuario?');">
+                        <button type="submit" class="btn-eliminar">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+
+            <tr th:if="${!pagina.hasContent()}">
+                <td colspan="5" class="sin-resultados">
+                    <span th:if="${#strings.isEmpty(q)}">No hay usuarios registrados.</span>
+                    <span th:unless="${#strings.isEmpty(q)}"
+                          th:text="|No se encontraron usuarios que contengan «${q}».|"></span>
+                </td>
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <div th:replace="~{fragments/componentes :: paginacion(${pagina}, '/usuarios', ${q})}"></div>
+
+</main>
+
+<footer class="pie">
+
+    Sistema de Reservas de Aulas &copy; 2026
+
+</footer>
+
+</body>
+
+</html>

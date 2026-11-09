@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Componentes reutilizables</title>
+</head>
+<body>
+
+<!-- Menú de navegación. Uso: th:replace="~{fragments/componentes :: menu('aulas')}" -->
+<nav th:fragment="menu(activo)" class="menu-principal">
+    <!-- Tema oscuro: la hoja de estilos solo se carga si la cookie "tema" vale "oscuro" -->
+    <link rel="stylesheet" th:if="${tema == 'oscuro'}" th:href="@{/css/tema-oscuro.css}">
+
+    <a th:href="@{/}" th:classappend="${activo == 'inicio'} ? 'activo'">Inicio</a>
+    <a th:href="@{/aulas}" th:classappend="${activo == 'aulas'} ? 'activo'">Aulas</a>
+    <a th:href="@{/cursos}" th:classappend="${activo == 'cursos'} ? 'activo'">Cursos</a>
+    <a th:href="@{/usuarios}" th:classappend="${activo == 'usuarios'} ? 'activo'">Usuarios</a>
+    <a th:href="@{/reservas}" th:classappend="${activo == 'reservas'} ? 'activo'">Reservas</a>
+
+    <!-- Usuario con sesión iniciada + cerrar sesión (POST: Thymeleaf agrega el token CSRF) -->
+    <div class="sesion" sec:authorize="isAuthenticated()">
+        <!-- Nombre guardado en la HttpSession al iniciar sesión -->
+        <span th:text="${usuarioActivo}">Usuario activo</span>
+
+        <!-- Preferencia de tema: se guarda en una cookie -->
+        <form th:action="@{/preferencias/tema}" method="post">
+            <input type="hidden" name="valor" th:value="${tema == 'oscuro'} ? 'claro' : 'oscuro'">
+            <button type="submit" class="btn-salir" th:text="${tema == 'oscuro'} ? 'Tema claro' : 'Tema oscuro'">Tema oscuro</button>
+        </form>
+
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn-salir">Cerrar sesión</button>
+        </form>
+    </div>
+</nav>
+
+<!-- Mensajes de éxito ("mensaje") y de error ("error") que llegan con RedirectAttributes -->
+<div th:fragment="alertas">
+    <div class="alerta alerta-exito" th:if="${mensaje}" th:text="${mensaje}"></div>
+    <div class="alerta alerta-error" th:if="${error}" th:text="${error}"></div>
+</div>
+
+<!-- Caja de búsqueda (GET). Enviar el campo vacío equivale a mostrar todo el listado. -->
+<form th:fragment="buscador(url, q, ayuda)" th:action="@{${url}}" method="get" class="buscador">
+    <input type="text" name="q" th:value="${q}" th:placeholder="${ayuda}" maxlength="100">
+    <button type="submit" class="btn-buscar">Buscar</button>
+    <a th:if="${!#strings.isEmpty(q)}" th:href="@{${url}}" class="btn-limpiar">Limpiar</a>
+</form>
+
+<!-- Resumen + botones de paginación. "pagina" es un org.springframework.data.domain.Page -->
+<div th:fragment="paginacion(pagina, url, q)" class="paginacion-bloque">
+
+    <p class="paginacion-info" th:if="${pagina.totalElements gt 0}"
+       th:text="|Mostrando ${pagina.number * pagina.size + 1} - ${pagina.number * pagina.size + pagina.numberOfElements} de ${pagina.totalElements} registros (página ${pagina.number + 1} de ${pagina.totalPages}, ${pagina.size} por página)|">
+    </p>
+
+    <ul class="paginacion" th:if="${pagina.totalPages gt 1}">
+
+        <!-- Anterior -->
+        <li th:if="${pagina.hasPrevious()}">
+            <a th:href="@{${url}(page=${pagina.number - 1}, size=${pagina.size}, q=${q})}">&laquo; Anterior</a>
+        </li>
+        <li th:unless="${pagina.hasPrevious()}" class="deshabilitado"><span>&laquo; Anterior</span></li>
+
+        <!-- Números: siempre la primera y la última, y 2 páginas a cada lado de la actual -->
+        <th:block th:each="i : ${#numbers.sequence(0, pagina.totalPages - 1)}">
+            <li th:if="${i == 0 or i == pagina.totalPages - 1 or (i ge pagina.number - 2 and i le pagina.number + 2)}"
+                th:classappend="${i == pagina.number} ? 'activa'">
+                <a th:href="@{${url}(page=${i}, size=${pagina.size}, q=${q})}" th:text="${i + 1}">1</a>
+            </li>
+            <li class="puntos"
+                th:if="${(i == pagina.number - 3 and i gt 0) or (i == pagina.number + 3 and i lt pagina.totalPages - 1)}">
+                <span>&hellip;</span>
+            </li>
+        </th:block>
+
+        <!-- Siguiente -->
+        <li th:if="${pagina.hasNext()}">
+            <a th:href="@{${url}(page=${pagina.number + 1}, size=${pagina.size}, q=${q})}">Siguiente &raquo;</a>
+        </li>
+        <li th:unless="${pagina.hasNext()}" class="deshabilitado"><span>Siguiente &raquo;</span></li>
+    </ul>
+</div>
+
+</body>
+</html>

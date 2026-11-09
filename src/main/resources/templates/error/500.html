@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>500 - Error interno | Sistema de Reservas</title>
+    <link rel="stylesheet" th:href="@{/css/error.css}">
+    <link rel="stylesheet" th:if="${tema == 'oscuro'}" th:href="@{/css/tema-oscuro.css}">
+</head>
+
+<body>
+
+<header class="encabezado">
+    <h1>Sistema de Reservas de Aulas</h1>
+</header>
+
+<main class="error-contenedor">
+    <section th:replace="~{fragments/errores :: tarjeta('500', 'Error interno del servidor', 'Ocurrió un problema inesperado al procesar su solicitud. Inténtelo de nuevo en unos momentos; si el problema continúa, avise al administrador del sistema.')}"></section>
+</main>
+
+</body>
+
+</html>

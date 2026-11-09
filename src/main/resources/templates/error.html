@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Página genérica: se usa para cualquier error que no sea 404 ni 500 (400, 403, 405...) -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ocurrió un problema | Sistema de Reservas</title>
+    <link rel="stylesheet" th:href="@{/css/error.css}">
+    <link rel="stylesheet" th:if="${tema == 'oscuro'}" th:href="@{/css/tema-oscuro.css}">
+</head>
+
+<body>
+
+<header class="encabezado">
+    <h1>Sistema de Reservas de Aulas</h1>
+</header>
+
+<main class="error-contenedor"
+      th:with="titulo=${status == 400} ? 'Solicitud incorrecta'
+                 : (${status == 403} ? 'Acceso denegado'
+                 : (${status == 405} ? 'Acción no permitida' : 'Ocurrió un problema')),
+               mensaje=${status == 400} ? 'La solicitud enviada no es válida. Revise los datos e inténtelo de nuevo.'
+                 : (${status == 403} ? 'No tiene permiso para realizar esta acción.'
+                 : (${status == 405} ? 'Esa acción no está permitida en esta dirección.'
+                 : 'No fue posible completar su solicitud. Regrese a la aplicación e inténtelo de nuevo.'))">
+    <section th:replace="~{fragments/errores :: tarjeta(${status}, ${titulo}, ${mensaje})}"></section>
+</main>
+
+</body>
+
+</html>

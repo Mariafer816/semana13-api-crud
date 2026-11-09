@@ -1,0 +1,166 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f8f5;
+    color: #1f2937;
+    min-height: 100vh;
+}
+
+.encabezado {
+    background: #198754;
+    color: white;
+    padding: 28px 20px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+.encabezado h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.encabezado p {
+    font-size: 16px;
+    opacity: 0.95;
+}
+
+.contenedor {
+    width: min(1100px, 92%);
+    margin: 35px auto;
+}
+
+.titulo-seccion {
+    color: #146c43;
+    font-size: 24px;
+    margin-bottom: 22px;
+    border-left: 5px solid #198754;
+    padding-left: 12px;
+}
+
+.lista-cursos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 22px;
+    list-style: none;
+}
+
+.curso {
+    background: white;
+    border: 1px solid #d8e8de;
+    border-radius: 12px;
+    padding: 24px;
+    min-height: 150px;
+    box-shadow: 0 4px 12px rgba(25, 135, 84, 0.10);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.curso:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(25, 135, 84, 0.18);
+}
+
+.numero {
+    display: inline-flex;
+    width: 38px;
+    height: 38px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #198754;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.curso h3 {
+    color: #146c43;
+    font-size: 19px;
+    margin-bottom: 8px;
+}
+
+.curso p {
+    color: #667085;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.boton-editar {
+    display: inline-block;
+    margin-top: 14px;
+    text-decoration: none;
+    background: #0d6efd;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.boton-editar:hover {
+    background: #0a58ca;
+}
+
+.barra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.barra .titulo-seccion {
+    margin-bottom: 0;
+}
+
+.boton {
+    text-decoration: none;
+    background: #198754;
+    color: white;
+    padding: 11px 18px;
+    border-radius: 7px;
+    font-weight: bold;
+}
+
+.boton:hover {
+    background: #146c43;
+}
+
+.acciones {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 14px;
+}
+
+.acciones .boton-editar {
+    margin-top: 0;
+}
+
+.sin-resultados {
+    grid-column: 1 / -1;
+}
+
+.pie {
+    margin-top: 45px;
+    padding: 18px;
+    background: white;
+    border-top: 1px solid #d8e8de;
+    text-align: center;
+    color: #667085;
+    font-size: 14px;
+}
+
+@media (max-width: 600px) {
+    .encabezado h1 {
+        font-size: 26px;
+    }
+
+    .contenedor {
+        width: 90%;
+    }
+}

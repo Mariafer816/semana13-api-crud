@@ -1,0 +1,63 @@
+/* Pantallas de inicio de sesión y registro (se carga después de formulario.css) */
+
+.contenedor-auth {
+    width: min(440px, 92%);
+}
+
+.btn-bloque {
+    width: 100%;
+}
+
+.auth-enlace {
+    margin-top: 22px;
+    text-align: center;
+    font-size: 14px;
+    color: #667085;
+    line-height: 1.5;
+}
+
+.auth-enlace a {
+    color: #146c43;
+    font-weight: bold;
+}
+
+.ayuda {
+    display: block;
+    font-size: 13px;
+    color: #667085;
+    margin-top: 5px;
+}
+
+.aviso {
+    background: #e7f4ec;
+    border: 1px solid #cfe3d8;
+    color: #146c43;
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 22px;
+}
+
+.btn-enlace {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+}
+
+.auth-separador {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 26px 0 16px;
+    color: #667085;
+    font-size: 14px;
+}
+
+.auth-separador::before,
+.auth-separador::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #d8e8de;
+}

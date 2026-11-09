@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!-- Tarjeta común de las páginas de error. Uso: th:replace="~{fragments/errores :: tarjeta('404', 'Título', 'Mensaje')}" -->
+<section th:fragment="tarjeta(codigo, titulo, mensaje)" class="error-tarjeta">
+    <p class="error-codigo" th:text="${codigo}">404</p>
+    <h2 class="error-titulo" th:text="${titulo}">Título</h2>
+    <p class="error-mensaje" th:text="${mensaje}">Mensaje</p>
+
+    <div class="error-acciones">
+        <a class="error-boton" th:href="@{/}">Volver a la aplicación</a>
+        <button type="button" class="error-boton secundario" onclick="history.back()">Volver atrás</button>
+    </div>
+</section>
+
+</body>
+</html>

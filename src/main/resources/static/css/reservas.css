@@ -1,0 +1,119 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f8f5;
+    margin: 0;
+    padding: 30px;
+}
+
+.contenedor {
+    max-width: 1100px;
+    margin: auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #2e7d32;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.botones {
+    margin-bottom: 20px;
+}
+
+.boton-nueva,
+.boton-ver,
+.boton-editar,
+.boton-eliminar {
+    display: inline-block;
+    padding: 9px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-right: 5px;
+    color: white;
+    font-size: 14px;
+}
+
+.boton-nueva {
+    background-color: #2e7d32;
+}
+
+.boton-ver {
+    background-color: #1976d2;
+}
+
+.boton-editar {
+    background-color: #f9a825;
+}
+
+.boton-eliminar {
+    background-color: #c62828;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th {
+    background-color: #2e7d32;
+    color: white;
+    padding: 12px;
+    text-align: center;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+tr:hover {
+    background-color: #f1f8f3;
+}
+
+.boton-eliminar {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+form.inline {
+    display: inline;
+}
+
+.mensaje, .error-msg {
+    padding: 12px 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.mensaje {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+.error-msg {
+    background: #f8d7da;
+    color: #842029;
+}
+
+.estado {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+.sin-reservas {
+    text-align: center;
+    padding: 30px;
+    color: #666;
+}

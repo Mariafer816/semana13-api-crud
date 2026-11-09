@@ -1,0 +1,43 @@
+/* Menú principal (se carga después de listado.css) */
+
+.menu-intro {
+    text-align: center;
+    color: #667085;
+    font-size: 17px;
+    margin-bottom: 25px;
+}
+
+.menu-rejilla {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.tarjeta-menu {
+    display: block;
+    background: white;
+    border: 1px solid #d8e8de;
+    border-left: 5px solid #198754;
+    border-radius: 12px;
+    padding: 26px 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.tarjeta-menu:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.tarjeta-menu h3 {
+    color: #146c43;
+    font-size: 21px;
+    margin-bottom: 8px;
+}
+
+.tarjeta-menu p {
+    color: #667085;
+    line-height: 1.5;
+    font-size: 15px;
+}

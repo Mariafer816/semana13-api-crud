@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title th:text="${usuario.id != null} ? 'Editar Usuario' : 'Nuevo Usuario'">Formulario</title>
+    <link rel="stylesheet" th:href="@{/css/mejoras.css}">
+
+    <link rel="stylesheet" th:href="@{/css/formulario.css}">
+</head>
+
+<body>
+
+<header class="encabezado">
+
+    <h1>Sistema de Reservas de Aulas</h1>
+
+    <p>Gestión de usuarios</p>
+
+</header>
+
+<nav th:replace="~{fragments/componentes :: menu('usuarios')}"></nav>
+
+<main class="contenedor">
+
+    <section class="formulario">
+
+        <h2 th:text="${usuario.id != null} ? 'Editar Usuario' : 'Registrar Usuario'">Registrar Usuario</h2>
+
+        <!-- novalidate: se desactiva la validación del navegador para que se vea la del servidor (@Valid) -->
+        <form th:action="${usuario.id != null} ? @{/usuarios/{id}/actualizar(id=${usuario.id})} : @{/usuarios}"
+              th:object="${usuario}"
+              method="post"
+              novalidate>
+
+            <div class="campo">
+                <label for="nombre">Nombre completo</label>
+
+                <input type="text"
+                       id="nombre"
+                       th:field="*{nombre}"
+                       placeholder="Ejemplo: Carlos Pérez">
+
+                <span class="error"
+                      th:if="${#fields.hasErrors('nombre')}"
+                      th:errors="*{nombre}"></span>
+            </div>
+
+            <div class="campo">
+                <label for="correo">Correo electrónico</label>
+
+                <input type="text"
+                       id="correo"
+                       th:field="*{correo}"
+                       placeholder="Ejemplo: nombre@etitc.edu.co">
+
+                <span class="error"
+                      th:if="${#fields.hasErrors('correo')}"
+                      th:errors="*{correo}"></span>
+            </div>
+
+            <div class="campo">
+                <label for="rol">Rol</label>
+
+                <select id="rol" th:field="*{rol}">
+                    <option value="">Seleccione un rol</option>
+                    <option value="DOCENTE">Docente</option>
+                    <option value="ESTUDIANTE">Estudiante</option>
+                    <option value="ADMINISTRATIVO">Administrativo</option>
+                </select>
+
+                <span class="error"
+                      th:if="${#fields.hasErrors('rol')}"
+                      th:errors="*{rol}"></span>
+            </div>
+
+            <div class="botones">
+                <button type="submit" class="btn guardar">Guardar usuario</button>
+                <a th:href="@{/usuarios}" class="btn cancelar">Cancelar</a>
+            </div>
+
+        </form>
+
+    </section>
+
+</main>
+
+</body>
+
+</html>
